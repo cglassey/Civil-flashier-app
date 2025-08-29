@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a253a" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Civil Engineering Calculators</title>
+</head>
+<body>
+  <header>
+    <h1>Civil Engineering Calculators</h1>
+    <nav>
+      <button id="nav-site" class="active">Site</button>
+      <button id="nav-geotech">Geotechnical</button>
+      <button id="nav-structural">Structural</button>
+      <button id="nav-transport">Transportation</button>
+      <button id="nav-environment">Environmental</button>
+      <button id="nav-hydraulics">Hydraulics</button>
+      <button id="nav-construction">Construction</button>
+    </nav>
+  </header>
+  <main>
+    <!-- Site/Civil Calculator -->
+    <section id="section-site" class="calculator-section">
+      <h2>Site/Civil Calculator</h2>
+      <div class="calculator-row">
+        <form id="form-site" class="input-form">
+          <h3>Cut and Fill Volume</h3>
+          <label>
+            Area 1 (A<sub>1</sub>):
+            <input type="number" step="any" id="site-a1" placeholder="m²" />
+          </label>
+          <label>
+            Area 2 (A<sub>2</sub>):
+            <input type="number" step="any" id="site-a2" placeholder="m²" />
+          </label>
+          <label>
+            Length (L):
+            <input type="number" step="any" id="site-length" placeholder="m" />
+          </label>
+          <label>
+            Method:
+            <select id="site-method">
+              <option value="avg">Average End Area</option>
+              <option value="prism">Prismoidal</option>
+            </select>
+          </label>
+        </form>
+        <div class="output-area">
+          <h3>Volume</h3>
+          <p id="site-volume">—</p>
+          <canvas id="site-canvas" width="300" height="200"></canvas>
+        </div>
+      </div>
+      <div class="calculator-row">
+        <form id="form-rational" class="input-form">
+          <h3>Rational Runoff</h3>
+          <label>
+            Runoff coefficient (C):
+            <input type="number" step="any" id="runoff-c" placeholder="0.1–1.0" />
+          </label>
+          <label>
+            Rainfall intensity (I):
+            <input type="number" step="any" id="runoff-i" placeholder="mm/h" />
+          </label>
+          <label>
+            Area (A):
+            <input type="number" step="any" id="runoff-a" placeholder="ha" />
+          </label>
+        </form>
+        <div class="output-area">
+          <h3>Peak Discharge (Q)</h3>
+          <p id="runoff-q">—</p>
+          <canvas id="runoff-canvas" width="300" height="200"></canvas>
+        </div>
+      </div>
+    </section>
+    <!-- Geotechnical Calculator -->
+    <section id="section-geotech" class="calculator-section hidden">
+      <h2>Geotechnical Calculator</h2>
+      <div class="calculator-row">
+        <form id="form-shear" class="input-form">
+          <h3>Mohr–Coulomb Shear Strength</h3>
+          <label>
+            Cohesion (c'): 
+            <input type="number" step="any" id="geotech-c" placeholder="kPa" />
+          </label>
+          <label>
+            Normal effective stress (σ'): 
+            <input type="number" step="any" id="geotech-sigma" placeholder="kPa" />
+          </label>
+          <label>
+            Friction angle (φ'): 
+            <input type="number" step="any" id="geotech-phi" placeholder="°" />
+          </label>
+        </form>
+        <div class="output-area">
+          <h3>Shear Stress (τ)</h3>
+          <p id="geotech-tau">—</p>
+          <canvas id="geotech-canvas" width="300" height="200"></canvas>
+        </div>
+      </div>
+      <div class="calculator-row">
+        <form id="form-bear" class="input-form">
+          <h3>Bearing Capacity (Terzaghi)</h3>
+          <label>
+            Cohesion (c'): 
+            <input type="number" step="any" id="bear-c" placeholder="kPa" />
+          </label>
+          <label>
+            Surcharge (q'): 
+            <input type="number" step="any" id="bear-q" placeholder="kPa" />
+          </label>
+          <label>
+            Unit weight (γ'): 
+            <input type="number" step="any" id="bear-gamma" placeholder="kN/m³" />
+          </label>
+          <label>
+            Width (B): 
+            <input type="number" step="any" id="bear-b" placeholder="m" />
+          </label>
+          <label>
+            Friction angle (φ'): 
+            <input type="number" step="any" id="bear-phi" placeholder="°" />
+          </label>
+        </form>
+        <div class="output-area">
+          <h3>Bearing Capacity (Q<sub>ult</sub>)</h3>
+          <p id="bear-qult">—</p>
+          <canvas id="bear-canvas" width="300" height="200"></canvas>
+        </div>
+      </div>
+    </section>
+    <!-- Structural Calculator -->
+    <section id="section-structural" class="calculator-section hidden">
+      <h2>Structural Calculator</h2>
+      <div class="calculator-row">
+        <form id="form-bending" class="input-form">
+          <h3>Beam Bending and Deflection</h3>
+          <label>
+            Load intensity (w): 
+            <input type="number" step="any" id="beam-w" placeholder="kN/m" />
+          </label>
+          <label>
+            Span length (L): 
+            <input type="number" step="any" id="beam-l" placeholder="m" />
+          </label>
+          <label>
+            Modulus of elasticity (E): 
+            <input type="number" step="any" id="beam-e" placeholder="GPa" />
+          </label>
+          <label>
+            Moment of inertia (I): 
+            <input type="number" step="any" id="beam-i" placeholder="m⁴" />
+          </label>
+        </form>
+        <div class="output-area">
+          <h3>Maximum Stress and Deflection</h3>
+          <p id="beam-stress">—</p>
+          <p id="beam-deflection">—</p>
+          <canvas id="beam-canvas" width="300" height="200"></canvas>
+        </div>
+      </div>
+      <div class="calculator-row">
+        <form id="form-buckling" class="input-form">
+          <h3>Euler Buckling</h3>
+          <label>
+            Modulus of elasticity (E): 
+            <input type="number" step="any" id="buckling-e" placeholder="GPa" />
+          </label>
+          <label>
+            Moment of inertia (I): 
+            <input type="number" step="any" id="buckling-i" placeholder="m⁴" />
+          </label>
+          <label>
+            Length (L): 
+            <input type="number" step="any" id="buckling-l" placeholder="m" />
+          </label>
+          <label>
+            End condition factor (K): 
+            <input type="number" step="any" id="buckling-k" placeholder="1 for pinned" value="1" />
+          </label>
+        </form>
+        <div class="output-area">
+          <h3>Critical Load (P<sub>cr</sub>)</h3>
+          <p id="buckling-pcr">—</p>
+          <canvas id="buckling-canvas" width="300" height="200"></canvas>
+        </div>
+      </div>
+    </section>
+    <!-- Transportation Calculator -->
+    <section id="section-transport" class="calculator-section hidden">
+      <h2>Transportation Calculator</h2>
+      <div class="calculator-row">
+        <form id="form-flow" class="input-form">
+          <h3>Fundamental Diagram</h3>
+          <label>
+            Free-flow speed (v<sub>f</sub>): 
+            <input type="number" step="any" id="flow-vf" placeholder="km/h" />
+          </label>
+          <label>
+            Jam density (k<sub>j</sub>): 
+            <input type="number" step="any" id="flow-kj" placeholder="veh/km" />
+          </label>
+        </form>
+        <div class="output-area">
+          <h3>Flow (q) vs Density (k)</h3>
+          <canvas id="flow-canvas" width="300" height="200"></canvas>
+        </div>
+      </div>
+      <div class="calculator-row">
+        <form id="form-ssd" class="input-form">
+          <h3>Stopping Sight Distance</h3>
+          <label>
+            Speed (v): 
+            <input type="number" step="any" id="ssd-v" placeholder="km/h" />
+          </label>
+          <label>
+            Reaction time (t<sub>r</sub>): 
+            <input type="number" step="any" id="ssd-tr" placeholder="s" />
+          </label>
+          <label>
+            Friction factor (f): 
+            <input type="number" step="any" id="ssd-f" placeholder="–" />
+          </label>
+          <label>
+            Grade (G): 
+            <input type="number" step="any" id="ssd-g" placeholder="decimal" value="0" />
+          </label>
+        </form>
+        <div class="output-area">
+          <h3>Stopping Distance</h3>
+          <p id="ssd-distance">—</p>
+          <canvas id="ssd-canvas" width="300" height="200"></canvas>
+        </div>
+      </div>
+    </section>
+    <!-- Environmental Calculator -->
+    <section id="section-environment" class="calculator-section hidden">
+      <h2>Environmental Calculator</h2>
+      <div class="calculator-row">
+        <form id="form-do" class="input-form">
+          <h3>DO Sag (Streeter–Phelps)</h3>
+          <label>
+            Deoxygenation rate (k<sub>1</sub>): 
+            <input type="number" step="any" id="do-k1" placeholder="1/day" />
+          </label>
+          <label>
+            Reaeration rate (k<sub>2</sub>): 
+            <input type="number" step="any" id="do-k2" placeholder="1/day" />
+          </label>
+          <label>
+            Ultimate BOD (L<sub>a</sub>): 
+            <input type="number" step="any" id="do-la" placeholder="mg/L" />
+          </label>
+          <label>
+            Initial deficit (D<sub>a</sub>): 
+            <input type="number" step="any" id="do-da" placeholder="mg/L" />
+          </label>
+        </form>
+        <div class="output-area">
+          <h3>DO Deficit Curve</h3>
+          <canvas id="do-canvas" width="300" height="200"></canvas>
+        </div>
+      </div>
+    </section>
+    <!-- Hydraulics Calculator -->
+    <section id="section-hydraulics" class="calculator-section hidden">
+      <h2>Hydraulics Calculator</h2>
+      <div class="calculator-row">
+        <form id="form-manning" class="input-form">
+          <h3>Manning's Equation for Rectangular Channel</h3>
+          <label>
+            Width (b): 
+            <input type="number" step="any" id="manning-b" placeholder="m" />
+          </label>
+          <label>
+            Depth (d): 
+            <input type="number" step="any" id="manning-d" placeholder="m" />
+          </label>
+          <label>
+            Slope (S): 
+            <input type="number" step="any" id="manning-s" placeholder="m/m" />
+          </label>
+          <label>
+            Manning's n: 
+            <input type="number" step="any" id="manning-n" placeholder="–" />
+          </label>
+        </form>
+        <div class="output-area">
+          <h3>Flow Rate (Q)</h3>
+          <p id="manning-q">—</p>
+          <canvas id="manning-canvas" width="300" height="200"></canvas>
+        </div>
+      </div>
+    </section>
+    <!-- Construction/Project Management Calculator -->
+    <section id="section-construction" class="calculator-section hidden">
+      <h2>Construction/Project Management Calculator</h2>
+      <div class="calculator-row">
+        <form id="form-evm" class="input-form">
+          <h3>Earned Value Management</h3>
+          <label>
+            Earned value (EV): 
+            <input type="number" step="any" id="evm-ev" placeholder="$" />
+          </label>
+          <label>
+            Planned value (PV): 
+            <input type="number" step="any" id="evm-pv" placeholder="$" />
+          </label>
+          <label>
+            Actual cost (AC): 
+            <input type="number" step="any" id="evm-ac" placeholder="$" />
+          </label>
+          <label>
+            Budget at completion (BAC): 
+            <input type="number" step="any" id="evm-bac" placeholder="$" />
+          </label>
+        </form>
+        <div class="output-area">
+          <h3>Metrics</h3>
+          <p id="evm-spi">SPI: —</p>
+          <p id="evm-cpi">CPI: —</p>
+          <p id="evm-eac">EAC: —</p>
+          <canvas id="evm-canvas" width="300" height="200"></canvas>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>© 2025 Civil Engineering Calculators</p>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
